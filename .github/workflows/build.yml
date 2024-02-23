@@ -1,9 +1,13 @@
 name: Continuous Integration
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +26,9 @@ jobs:
         run: |
           go build -v ./...
 
+      - name: Test
+        run: go test -v ./...
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -34,5 +41,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: examuserasdf/nbx:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nbx:latest
 
