@@ -41,5 +41,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nbx:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/nbx:latest
 
