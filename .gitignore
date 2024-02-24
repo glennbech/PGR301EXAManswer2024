@@ -19,3 +19,9 @@
 
 # Go workspace file
 go.work
+
+# sensitive terraform files
+*.tfstate
+*.tfstate.backup
+*.terraform
+*.terraform.lock.hcl
