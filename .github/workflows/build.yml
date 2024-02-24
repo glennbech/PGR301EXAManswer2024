@@ -35,7 +35,7 @@ jobs:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_TOKEN}}
 
-      - name: Build Docker image
+      - name: Build Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -44,7 +44,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPOSITORY_NAME }}:latest
 
       - name: Push Docker Image
-        if: github.ref == 'refs/head/main' # Only push if on main branch
+        if: github.ref == 'refs/heads/main' # Only push if on main branch
         uses: docker/build-push-action@v5
         with:
           context: .
