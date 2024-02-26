@@ -1,98 +1,171 @@
+In case it is needed here:
+Kandidatnr: 2
+
 # Blockchain Busters- Kontinuasjonsoppgave PGR301 2023/2024
 
-## Krav til leveransen
+ The discussion task source is based on the course material specifically the pptx/pdf slides and additional links will be provided under as "ref: ".
+## Task 1A: 
+Check github workflow + `Build.yml`
 
-* Eksamensoppgaven, kode og nødvendige filer er tilgjengelig i GitHub-repo: https://github.com/glennbechdevops/PGR301-konte-2024
-* Du skal ikke opprette en fork av dette repositoryet, Lag et nytt GitHub repository for din besvarelse
-* Når du leverer inn oppgaven via WiseFlow, vennligst opprett et tekstdokument som kun inneholder en kobling til ditt
-  repository.
-* Vennligst bruk et tekstdokumentformat, ikke PDF, Word eller PowerPoint.
-* Dersom du er bekymret for plagiat fra medstudenter, kan du arbeide i et privat repository og deretter gjøre det
-  offentlig tilgjengelig like før innleveringsfristen.
+## Task 1B:
+To ensure that pull requests to protected branches like main meet certain criteria before they can be merged (such as the code compiling successfully and all tests passing), you can use GitHub's branch protection rules in combination with Continuous Integration (CI) workflows:
 
-Når oppgaven evalueres, vil han/hun:
+1. Go to your GitHub repository and click on "Settings".
 
-* Se gjennom repositoriet ditt og gå til fanen "Actions" på GitHub for å bekrefte at Workflows faktisk fungerer som de skal.
-* Vurdere drøftelsesoppgavene. Du må opprette en fil, README.md for besvarelsen i ditt repository. 
-* Sensoren vil lage en "fork" (en kopi) av ditt repository og deretter kjøre GitHub Actions Workflows med sin egen  GitHub-bruker for å bekrefte at alt fungerer som forventet.
+2. In the left sidebar, click on "Branches" under the "Code and automation" section.
 
-## Om bruk av KI
+3. Click on "Add rule" to create a new branch protection rule.
 
-* Det er viktig at du forstår all kode og alle deler av det du leverer. Dersom svar på en oppgave innholder elementer som ikke er nødvendig for å løse oppgaven, vil dette medføre trekk av poeng. 
+4. In the "Branch name pattern" field, enter main (or your target branch name).
 
-# Evaluering
+5. Under "Protect matching branches", you can configure various settings. To require the CI checks to pass before merging, check the following options:
 
-- Oppgave 1. GitHub Actions workflow - 30 Poeng
-- Oppgave 2. Terraform  - 30 Poeng
-- Oppgave 3. Docker hub og GitHub Actions  - 40 Poeng
+* Require status checks to pass before merging: This option enables required status checks.
+* Require branches to be up-to-date before merging: This ensures the branch is not out-of-date with the base branch.
+* In the "Status checks found in the last week for this repository" section, select the CI workflows you want to require.
+* If your workflow is named "Continuous Integration", "Build" or "Build-and-test" you should see it listed there. Running them at least once will be needed for them to show up
+    
+6. Optionally, you can enable other protections like "Require linear history", "Include administrators", "Require pull request reviews before merging", etc.
 
-## Oppgavebeskrivelse 
+7. Click "Create" or "Save changes" to apply the branch protection rule.
+## Task 1C:
 
-Blockchain Busters (BCB) er et nystartet selskap innen kvantitativ trading av kryptovaluta. BCB vil analysere handler og markedsdata fra ulike kryptovalutabørser for å utnytte ulike signaler i markedet. De vil bruke programvare og AI for å gjennomføre høyfrekvent, automatisk trading.
+### Advantages
 
-Selskapet er nylig etablert, og din oppgave er å sørge for en god start på programvareutviklingen. Først og fremst ønsker selskapet å utforske de åpne APIene til den norske kryptovalutabørsen NBX.
+#### 1. Improved Code Quality: 
+With multiple reviewers, the likelihood of catching bugs, logical errors, or issues with code standards increases. Reviewers can offer different perspectives and insights, leading to more robust and maintainable code.
 
-Utviklingen er i en tidlig fase, og all koden BCB har, finner du i dette repositoriet:
+#### 2. Knowledge Sharing: 
+The review process facilitates knowledge sharing among team members. Reviewers become familiar with parts of the codebase they might not directly work on, leading to a more cohesive and informed team.
 
-For å sikre minimal forsinkelse og optimal ytelse, har CTO valgt å bruke programmeringsspråket Go for all utvikling. Som student ved Kristiania, har du kanskje ikke mye erfaring med dette språket - men som en dyktig DevOps-Ingeniør, tenker du at du kan "DevOpse" hva som helst så lenge løsningen er basert på containere!
+#### 3. Consistency: 
+Having multiple approvals helps maintain consistency in code style, architecture, and development practices across the project, as more than one person is ensuring that contributions adhere to the project's standards.
+
+#### 4. Security: 
+Multiple reviews can enhance security by ensuring that changes are scrutinized for potential security flaws. This is particularly important in projects with significant security implications.
+
+#### 5. Reduction of "Bus Factor":
+The "bus factor" is a measure of the risk associated with the information and capabilities concentrated in a few individuals. Requiring multiple approvers helps mitigate this risk by ensuring that more team members are involved in and understand the codebase.
+ref: https://deviq.com/terms/bus-factor
+### Disadvantages
+
+#### 1. Slower Development Process: 
+Waiting for multiple approvals can slow down the development process, particularly in fast-paced environments or when reviewers are not promptly available.
+
+#### 2. Potential for Bottlenecks:
+If the pool of available reviewers is small or if certain individuals are frequently required for reviews due to their expertise, bottlenecks can occur, delaying important changes.
+
+#### 3. Increased Overhead for Small Changes: 
+For trivial or non-impactful changes, requiring multiple approvals might be overkill, adding unnecessary overhead and frustration.
+
+#### 4. Merge Conflicts: 
+In a fast-moving codebase, waiting for multiple approvals can increase the likelihood of merge conflicts, as the branch being reviewed may fall behind the main branch.
+
+### Balancing the Approach
+
+#### 1. Differentiating Change Types: 
+Applying different rules for different types of changes (e.g., critical vs. trivial changes) can help balance speed and thoroughness.
+
+#### 2. Automation: 
+Using automated checks for code style, testing, and security can reduce the manual review burden and speed up the process.
+
+#### 3. Clear Guidelines: 
+Providing clear, concise guidelines for both contributors and reviewers can streamline the review process and reduce bottlenecks.
+
+#### 4. Asynchronous Reviews: 
+Encouraging asynchronous reviews can help minimize delays, allowing reviewers to provide feedback at their convenience.
+
+#### 5. Reviewer Rotation: 
+Rotating reviewers can help prevent bottlenecks, distribute workload evenly, and foster broader team knowledge.
 
 
-- `NBXbook.go`
-- `Dockerfile`
+## Task 2A: 
+Check `infra/*`
 
-Koden viser den høyeste prisen noen er villig til å betale, og den laveste prisen noen er villige for å selge
-BitCoin for på kryptobørsen NBX. Differansnen kalles gjerne "Spread". Dokumentasjon finnes her : https://app.nbx.com/developers#tag/Order-Book
-
-### Oppgave 1 - GitHub Actions Workflow
-
-#### Test Koden
-
-Du kan teste koden med, ved hjelp av Docker, ved å kjøre kommandoene 
-
+## Task 2B:
+1. Write in cmd path **/infra:
 ```shell
-docker build . -t nbx
-docker run nbx
+terraform init
 ```
-
-A. Det første steget er å implementere kontinuerlig integrasjon. Lag en GitHub Actions workflow som, ved hver push til en hvilken som helst branch, kompilerer koden og lager et containerimage ved hjelp av `Dockerfile` i prosjektet.
-
-B. I PGR301 diskuterte vi en arbeidsflyt med beskyttede branches (f.eks., main), og hvordan man kan forhindre at en pull-request blir gjort mot hovedbranchen hvis koden ikke kompilerer, tester feiler, osv. Beskriv hvordan du konfigurerer dette i GitHub med ord eller skjermbilder.
-
-C. Reflekter over fordeler og ulemper med en arbeidsflyt der minst to personer i et team må godkjenne endringer mot main branch.
-
-### Oppgave 2 - Terraform - Infrastruktur som Kode
-
-- Opprett en konto på Docker Hub hvis du ikke allerede har det.
-- Advarsel; hvis du leverer et reelt brukeravn og passord for en Dockerhub-konto i bevarelse på denne oppgaven får du automatisk 0 poeng.
- 
-BCB ønsker å konfigurere alle repositoriene sine på Docker Hub ved hjelp av Terraform. De har funnet en Terraform provider som kan opprette Docker Hub repositories.
-* https://registry.Terraform.io/providers/BarnabyShearer/dockerhub/latest/docs
-  Ifølge dokumentasjonen er dette ressursen man må bruke:
-
-```hcl
-resource "dockerhub_repository" "project" {
-  name        = "project-name"
-  namespace   = "your-dockerhub-username"
-  description = "Project description"
-}
+Before you do the step below please check "option 1:" and "option 2:"
+2.
+```shell
+terraform plan
 ```
-* Hint: brukernavnet ditt på Docker Hub brukes for verdien ```namespace```
+3. 
+```shell
+terraform apply
+```
+##### Option 1:
+Use the -var option to set variables directly on the command line:
+1. Replace yourUsername + yourPassword with your Dockerhub username and password.
+2. Optional: also add -var="repository_name=yourRepositoryName" or else it will default to "nbx"
+```shell
+terraform plan -var="dockerhub_username=yourUsername" -var="dockerhub_password=yourPassword"
+```
+##### Option 2:
+Terraform will automatically use environment variables prefixed with TF_VAR_ to populate corresponding Terraform variables.
+		
+Go to environment variables and set two/three variables:
 
-A. Skriv Terraformkode som lager et Docker Hub repository som heter "nbx".
-* Lag en egen mappe med navn "infra" i ditt repository
-* Terraformkoden skal kreve Terraform versjon 1.6.4 eller høyere.
-* Du trenger ikke tenke på Terraform backend-konfigurasjon, Terraformkoden skal ikke kjøre i en GitHub Actions workflow
-* Docker-Hub brukernavn, og navn på repository skal ikke hardkodes. Du må skal bruke terraform variabler. (Se Advarssel)
-  
-B. Beskriv hva sensor må gjøre for å få terraform-koden til å kjøre på sin maskin, og med sin Docker-hub konto. 
+1.
+        Variable = TF_VAR_dockerhub_username
+        Value    = your dockerhub username
+2.
+        Variable = TF_VAR_dockerhub_password
+        Value    = your dockerhub password
+3.
+        Variable = TF_VAR_repository_name
+        Value    = default will be "nbx" if not changed
+Go to step 3.
 
-C. Kjør Terraform apply minst en gang, slik at et repository som heter "nbx" blir opprettet. Slett filen "Terraform.tfstate" kjør Terraform apply en gang til. Forklar hvorfor du får en feilmelding, og hvordan du kan løse dette
+## Task 2C:
+### Why you get an error:
+If you delete the `terraform.tfstate` file and then run again,
+```shell 
+terraform apply
+``` 
+Terraform loses its knowledge about what resources it's managing and their current state. So, when Terraform tries to create the Docker Hub repository "nbx" again, it finds that the repository already exists on Docker Hub, leading to an error because Docker Hub repository names must be unique.
 
-### Oppgave 3 - Docker Hub push
+The error message you're likely to see will indicate that the repository already exists, and Terraform is attempting to create a resource that conflicts with an existing one.
 
-- Oppdater din GitHub Actions workflow fra oppgave 1 slik at hver push til *main*-branchen bygger et containerimage og pusher container image til repository du lagde i oppgave 2.  
-- Ved hver push til en annen branch enn *main*, skal det fortsatt bygges et containerimage, men det skal ikke gjøres en push til Docker Hub.
-- Pass spesielt godt å ikke sjekke inn hemmeligheter.
-- Beskriv hva sensor må gjøre med sin fork av ditt repo for å få workflow til å fungere med in DockerHub konto.
+### How to resolve this issue:
+#### 1. Import the existing resource:
+You can use the terraform import command to import the existing Docker Hub repository into your Terraform state. This would look something like:
+```shell 
+terraform import dockerhub_repository.project user/nbx
+``` 
+"user" should be replaced with the actual docker hub username that is being used.  This command tells Terraform that the existing Docker Hub repository "nbx" should be managed as the resource named "project" in your Terraform configuration.
+#### 2. Delete the existing resource:
+If it's acceptable to delete the existing repository, you can manually remove it from Docker Hub and then run terraform apply again. This approach is straightforward but might not be suitable if the repository contains important images or tags.
+#### 3. Change the repository name:
+If neither of the above solutions is suitable, you can change the repository name in your Terraform configuration to something that doesn't already exist on Docker Hub. Update the default value of the repository_name variable in your variables.tf file and run terraform apply again.
 
-Hvilke docker kommando kan sensor bruke for å kjøre ditt container image på sin maskin?
+## Task 3:
+When the sensor has to use the GitHub Actions workflow with their Docker Hub account on their fork of the repository, they will need to make some adjustments and ensure that certain prerequisites are met:
+#### 1. Fork the Repository
+
+The sensor should start by forking the repository to their GitHub account. This creates a personal copy of the repository where they can make changes.
+#### 2. Configure Docker Hub Credentials as Secrets
+
+To push images to their Docker Hub account, the sensor needs to store their Docker Hub username and password/token as secrets in their forked GitHub repository:
+
+* Go to the forked repository on GitHub.
+* Navigate to "Settings" > "Secrets" > "Actions".
+* Click on "New repository secret".
+* Add a secret named DOCKER_USERNAME and set its value to their Docker Hub username.
+* Add a secret named DOCKER_TOKEN (or DOCKER_PASSWORD, depending on what has been used in the workflow file) and set its value to their Docker Hub access token or password.
+* Add a secret named REPOSITORY_NAME and set its value to (e.g., "nbx" or some other preferred name)
+
+Docker Hub access tokens can be generated from the Docker Hub settings under "Security". It's recommended to use a token instead of a password for security reasons.
+ref: https://docs.docker.com/security/for-developers/access-tokens/
+
+#### 3. Test the Workflow
+
+To test if the changes work as expected, the sensor can push a commit to a branch that triggers the workflow (e.g., main). They should then check the "Actions" tab in their GitHub repository to see if the workflow runs successfully and pushes the Docker image to their Docker Hub account.
+
+### "Hvilke docker kommando kan sensor bruke for å kjøre ditt container image på sin maskin?""
+### To run my Image
+```sh
+docker run -d --name students_container nbx:latest
+```

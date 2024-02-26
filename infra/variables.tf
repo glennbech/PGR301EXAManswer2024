@@ -11,4 +11,5 @@ variable "dockerhub_password" {
 variable "repository_name" {
   type        = string
   description = "Docker Hub repository name"
+  default     = "nbx"
 }
