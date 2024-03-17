@@ -19,6 +19,8 @@ type ConversionRate struct {
 }
 
 /*
+
+
     Koden viser den høyeste prisen noen er villig til å betale, og den laveste prisen noen er villige for å selge
     BitCoin for å kryptobørsen NBX. Koden ser bare å første "page" i responsen. Differansnen kalles gjerne "Spread"
     dokumentasjon https://app.nbx.com/developers#tag/Order-Book
